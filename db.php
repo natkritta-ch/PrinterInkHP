@@ -7,8 +7,8 @@ ini_set('display_errors', 1);
 
 $host = '127.0.0.1';
 $db   = 'printer_ink_db';
-$user = 'root';
-$pass = '';
+$user = 'printerink';
+$pass = 'Phan@11190';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
