@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIMS - Printer & Ink Management System</title>
+    <meta name="description" content="ระบบบริหารจัดการปริ้นเตอร์และคลังหมึก รองรับการแสกน QR/Barcode และวิเคราะห์งบประมาณ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🖨️</span>
+                    <span class="logo-text">PIMS</span>
+                </div>
+                <div class="nav-links desktop-only">
+                    <a href="#dashboard" class="active">หน้าหลัก</a>
+                    <a href="#printers">ปริ้นเตอร์</a>
+                    <a href="#inventory">คลังหมึก</a>
+                    <a href="#maintenance">การซ่อมบำรุง</a>
+                    <a href="#analysis">วิเคราะห์งบประมาณ</a>
+                </div>
+                <button id="scan-btn-nav" class="btn-primary scan-trigger">
+                    <span class="icon">📷</span>
+                    <span>แสกน QR/Barcode</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Content will be injected here by main.js -->
+            <div class="loader-container">
+                <div class="loader"></div>
+            </div>
+        </main>
+
+        <!-- Mobile Navigation Tab Bar -->
+        <div class="mobile-tab-bar mobile-only">
+            <a href="#dashboard" class="tab-item active" id="tab-dashboard">
+                <span class="tab-icon">🏠</span>
+                <span class="tab-label">หน้าหลัก</span>
+            </a>
+            <a href="#printers" class="tab-item" id="tab-printers">
+                <span class="tab-icon">🖨️</span>
+                <span class="tab-label">ปริ้นเตอร์</span>
+            </a>
+            <div class="tab-scan-placeholder">
+                <button id="scan-btn-mobile" class="scan-fab scan-trigger">
+                    <span class="icon">📷</span>
+                </button>
+            </div>
+            <a href="#inventory" class="tab-item" id="tab-inventory">
+                <span class="tab-icon">📦</span>
+                <span class="tab-label">คลังหมึก</span>
+            </a>
+            <a href="#analysis" class="tab-item" id="tab-analysis">
+                <span class="tab-icon">📊</span>
+                <span class="tab-label">วิเคราะห์</span>
+            </a>
+        </div>
+
+        <!-- QR Scanner Modal -->
+        <div id="scanner-modal" class="modal">
+            <div class="modal-content glass">
+                <div class="modal-header">
+                    <h3>แสกน QR หรือ Barcode</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="reader"></div>
+                    <div class="scanner-instructions">
+                        แสกน QR ที่เครื่องปริ้นเตอร์เพื่อดูประวัติ/เบิกหมึก<br>
+                        หรือแสกน Barcode ที่กล่องหมึกเพื่อเช็คสต๊อก
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
