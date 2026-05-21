@@ -84,7 +84,7 @@ $fullName = $_SESSION['full_name'] ?? $username;
                     <?php if($userRole === 'admin'): ?>
                         <a href="#departments" class="nav-item" data-page="departments"><span class="icon">🏢</span> จัดการหน่วยงาน</a>
                         <a href="#users" class="nav-item" data-page="users"><span class="icon">👥</span> จัดการผู้ใช้</a>
-                        <a href="api.php?action=backup_db" target="_blank" class="nav-item-link" style="display:flex; align-items:center; padding:12px 16px; margin-bottom:4px; border-radius:12px; color:var(--text-main); text-decoration:none; transition:all 0.2s;"><span class="icon" style="margin-right:12px; font-size:1.1rem; width:24px; text-align:center;">💾</span> สำรองฐานข้อมูล</a>
+                        <a href="#backup" class="nav-item" data-page="backup"><span class="icon">💾</span> สำรองฐานข้อมูล</a>
                         <a href="#server_info" class="nav-item" data-page="server_info"><span class="icon">🖥️</span> ข้อมูล Server</a>
                     <?php endif; ?>
                 </nav>
