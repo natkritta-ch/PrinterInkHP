@@ -367,7 +367,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             echo json_encode([
                 'success' => true,
-                'fiscal_year' => $year,
+                'fiscal_year' => $year_be,
                 'quarterly' => $analysis_data,
                 'top_items' => $top_items
             ]);
