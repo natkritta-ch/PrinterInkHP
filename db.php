@@ -6,9 +6,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $host = '127.0.0.1';
-$db   = 'printerink_hp';
-$user = 'admin';
-$pass = 'Ch_14112547';
+$db   = 'printer_ink_db';
+$user = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
