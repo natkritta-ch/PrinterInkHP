@@ -1237,6 +1237,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($action === 'restore_db') {
+        try {
+            if (!isset($_FILES['backup_file']) || $_FILES['backup_file']['error'] !== UPLOAD_ERR_OK) {
+                throw new Exception('ไม่พบไฟล์ หรือเกิดข้อผิดพลาดในการอัปโหลด');
+            }
+
+            $file = $_FILES['backup_file']['tmp_name'];
+            $sql = file_get_contents($file);
+
+            if (empty($sql)) {
+                throw new Exception('ไฟล์ว่างเปล่าหรือไม่สามารถอ่านได้');
+            }
+
+            $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
+            
+            $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+            foreach ($tables as $table) {
+                $pdo->exec("DROP TABLE IF EXISTS `$table`");
+            }
+
+            // Execute the SQL dump
+            $pdo->exec($sql);
+            
+            $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
+
+            echo json_encode(['success' => true]);
+        } catch (Exception $e) {
+            $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+        exit;
+    }
+
     }
 
 // Auto Cleanup: ลบข้อมูลในถังขยะที่เกิน 30 วัน

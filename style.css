@@ -86,9 +86,6 @@ body {
 main {
     margin-top: var(--nav-height);
     padding: 24px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
     padding-bottom: 100px; /* Space for mobile tab bar */
 }
 

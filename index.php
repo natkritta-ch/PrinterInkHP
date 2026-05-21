@@ -85,6 +85,7 @@ $fullName = $_SESSION['full_name'] ?? $username;
                         <a href="#departments" class="nav-item" data-page="departments"><span class="icon">🏢</span> จัดการหน่วยงาน</a>
                         <a href="#users" class="nav-item" data-page="users"><span class="icon">👥</span> จัดการผู้ใช้</a>
                         <a href="#backup" class="nav-item" data-page="backup"><span class="icon">💾</span> สำรองฐานข้อมูล</a>
+                        <a href="#restore" class="nav-item" data-page="restore"><span class="icon">♻️</span> คืนค่าฐานข้อมูล</a>
                         <a href="#server_info" class="nav-item" data-page="server_info"><span class="icon">🖥️</span> ข้อมูล Server</a>
                     <?php endif; ?>
                 </nav>

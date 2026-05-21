@@ -397,98 +397,104 @@ try {
         </div>
     </div>
 
-    <!-- Card สถิติและประวัติ -->
-    <div class="card">
-        <h3>แดชบอร์ดสรุป</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px">
-            <div style="text-align: center; padding: 16px; background: rgba(99, 102, 241, 0.05); border-radius: 16px">
-                <p style="font-size: 0.8rem; color: var(--text-muted)">เบิกหมึกไปแล้ว</p>
-                <h2 style="color: var(--primary)"><?php echo $inkCount; ?> <span style="font-size: 0.9rem; font-weight: 400">ครั้ง</span></h2>
-            </div>
-            <div style="text-align: center; padding: 16px; background: rgba(245, 158, 11, 0.05); border-radius: 16px">
-                <p style="font-size: 0.8rem; color: var(--text-muted)">ซ่อมบำรุงไปแล้ว</p>
-                <h2 style="color: var(--warning)"><?php echo $repairCount; ?> <span style="font-size: 0.9rem; font-weight: 400">ครั้ง</span></h2>
+    <!-- Column 2 (แดชบอร์ด + ประวัติเบิกหมึก) -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Card สถิติและประวัติ -->
+        <div class="card" style="margin-bottom: 0;">
+            <h3>แดชบอร์ดสรุป</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px">
+                <div style="text-align: center; padding: 16px; background: rgba(99, 102, 241, 0.05); border-radius: 16px">
+                    <p style="font-size: 0.8rem; color: var(--text-muted)">เบิกหมึกไปแล้ว</p>
+                    <h2 style="color: var(--primary)"><?php echo $inkCount; ?> <span style="font-size: 0.9rem; font-weight: 400">ครั้ง</span></h2>
+                </div>
+                <div style="text-align: center; padding: 16px; background: rgba(245, 158, 11, 0.05); border-radius: 16px">
+                    <p style="font-size: 0.8rem; color: var(--text-muted)">ซ่อมบำรุงไปแล้ว</p>
+                    <h2 style="color: var(--warning)"><?php echo $repairCount; ?> <span style="font-size: 0.9rem; font-weight: 400">ครั้ง</span></h2>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Card ประวัติเบิกหมึก -->
-    <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
-            <h3>ประวัติการเบิกหมึก</h3>
-            <a href="#ink" onclick="if(window.loadPage) { window.loadPage('ink'); return false; }" style="font-size: 0.8rem; color: var(--primary)">ดูคลังหมึก</a>
-        </div>
-        <?php if (empty($ink_history)): ?>
-            <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการเบิก</p>
-        <?php else: ?>
-            <div class="history-list">
-                <?php foreach ($ink_history as $h): ?>
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border)">
-                        <div>
-                            <p style="font-weight: 600; font-size: 0.9rem"><?php echo htmlspecialchars($h['ink_name']); ?></p>
-                            <p style="font-size: 0.75rem; color: var(--text-muted)"><?php echo thdatetime($h['transaction_date']); ?></p>
+        <!-- Card ประวัติเบิกหมึก -->
+        <div class="card" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
+                <h3>ประวัติการเบิกหมึก</h3>
+                <a href="#ink" onclick="if(window.loadPage) { window.loadPage('ink'); return false; }" style="font-size: 0.8rem; color: var(--primary)">ดูคลังหมึก</a>
+            </div>
+            <?php if (empty($ink_history)): ?>
+                <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการเบิก</p>
+            <?php else: ?>
+                <div class="history-list" style="max-height: 280px; overflow-y: auto; padding-right: 8px;">
+                    <?php foreach ($ink_history as $h): ?>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border)">
+                            <div>
+                                <p style="font-weight: 600; font-size: 0.9rem"><?php echo htmlspecialchars($h['ink_name']); ?></p>
+                                <p style="font-size: 0.75rem; color: var(--text-muted)"><?php echo thdatetime($h['transaction_date']); ?></p>
+                            </div>
+                            <div style="font-weight: 700; color: var(--accent)">-<?php echo $h['quantity']; ?></div>
                         </div>
-                        <div style="font-weight: 700; color: var(--accent)">-<?php echo $h['quantity']; ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
-    <!-- Card ประวัติการซ่อม -->
-    <div class="card" style="grid-column: span 1">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
-            <h3>ประวัติการซ่อมบำรุง</h3>
-            <a href="#maintenance" onclick="if(window.loadPage) { window.loadPage('maintenance'); return false; }" style="font-size: 0.8rem; color: var(--primary)">ดูประวัติทั้งหมด</a>
-        </div>
-        <?php if (empty($maintenance_history)): ?>
-            <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการซ่อม</p>
-        <?php else: ?>
-            <div class="history-list">
-                <?php foreach ($maintenance_history as $m): ?>
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border)">
-                        <p style="font-weight: 600; font-size: 0.9rem"><?php echo htmlspecialchars($m['symptoms']); ?></p>
-                        <p style="font-size: 0.75rem; color: var(--text-muted)">
-                            <?php echo thdate($m['repair_date']); ?> | ช่าง: <?php echo htmlspecialchars($m['technician_name']); ?>
-                        </p>
-                    </div>
-                <?php endforeach; ?>
+    <!-- Column 3 (ประวัติซ่อม + ประวัติย้าย) -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Card ประวัติการซ่อม -->
+        <div class="card" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
+                <h3>ประวัติการซ่อมบำรุง</h3>
+                <a href="#maintenance" onclick="if(window.loadPage) { window.loadPage('maintenance'); return false; }" style="font-size: 0.8rem; color: var(--primary)">ดูประวัติทั้งหมด</a>
             </div>
-        <?php endif; ?>
-    </div>
-
-    <!-- Card ประวัติการย้ายแผนก/สถานที่ -->
-    <div class="card" style="grid-column: span 1">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
-            <h3>ประวัติการย้ายแผนก/สถานที่</h3>
-        </div>
-        <?php if (empty($movement_history)): ?>
-            <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการย้าย</p>
-        <?php else: ?>
-            <div class="history-list">
-                <?php foreach ($movement_history as $move): ?>
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border)">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">
-                            <?php echo thdatetime($move['moved_at']); ?>
-                        </p>
-                        <div style="display:flex; flex-direction:column; gap:4px;">
-                            <?php if ($move['old_department'] !== $move['new_department']): ?>
-                                <div style="font-size:0.9rem;">
-                                    🏢 <span style="text-decoration:line-through; color:var(--danger)"><?php echo htmlspecialchars($move['old_department'] ?: 'ไม่ระบุ'); ?></span>
-                                    ➔ <strong style="color:var(--success)"><?php echo htmlspecialchars($move['new_department'] ?: 'ไม่ระบุ'); ?></strong>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($move['old_location'] !== $move['new_location']): ?>
-                                <div style="font-size:0.9rem;">
-                                    📍 <span style="text-decoration:line-through; color:var(--danger)"><?php echo htmlspecialchars($move['old_location'] ?: 'ไม่ระบุ'); ?></span>
-                                    ➔ <strong style="color:var(--success)"><?php echo htmlspecialchars($move['new_location'] ?: 'ไม่ระบุ'); ?></strong>
-                                </div>
-                            <?php endif; ?>
+            <?php if (empty($maintenance_history)): ?>
+                <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการซ่อม</p>
+            <?php else: ?>
+                <div class="history-list" style="max-height: 280px; overflow-y: auto; padding-right: 8px;">
+                    <?php foreach ($maintenance_history as $m): ?>
+                        <div style="padding: 12px 0; border-bottom: 1px solid var(--border)">
+                            <p style="font-weight: 600; font-size: 0.9rem"><?php echo htmlspecialchars($m['symptoms']); ?></p>
+                            <p style="font-size: 0.75rem; color: var(--text-muted)">
+                                <?php echo thdate($m['repair_date']); ?> | ช่าง: <?php echo htmlspecialchars($m['technician_name']); ?>
+                            </p>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Card ประวัติการย้ายแผนก/สถานที่ -->
+        <div class="card" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
+                <h3>ประวัติการย้ายแผนก/สถานที่</h3>
             </div>
-        <?php endif; ?>
+            <?php if (empty($movement_history)): ?>
+                <p style="text-align: center; padding: 20px; color: var(--text-muted)">ไม่มีประวัติการย้าย</p>
+            <?php else: ?>
+                <div class="history-list" style="max-height: 280px; overflow-y: auto; padding-right: 8px;">
+                    <?php foreach ($movement_history as $move): ?>
+                        <div style="padding: 12px 0; border-bottom: 1px solid var(--border)">
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">
+                                <?php echo thdatetime($move['moved_at']); ?>
+                            </p>
+                            <div style="display:flex; flex-direction:column; gap:4px;">
+                                <?php if ($move['old_department'] !== $move['new_department']): ?>
+                                    <div style="font-size:0.9rem;">
+                                        🏢 <span style="text-decoration:line-through; color:var(--danger)"><?php echo htmlspecialchars($move['old_department'] ?: 'ไม่ระบุ'); ?></span>
+                                        ➔ <strong style="color:var(--success)"><?php echo htmlspecialchars($move['new_department'] ?: 'ไม่ระบุ'); ?></strong>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($move['old_location'] !== $move['new_location']): ?>
+                                    <div style="font-size:0.9rem;">
+                                        📍 <span style="text-decoration:line-through; color:var(--danger)"><?php echo htmlspecialchars($move['old_location'] ?: 'ไม่ระบุ'); ?></span>
+                                        ➔ <strong style="color:var(--success)"><?php echo htmlspecialchars($move['new_location'] ?: 'ไม่ระบุ'); ?></strong>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 
@@ -521,7 +527,7 @@ try {
 
 <script>
     // สร้าง QR Code ขนาดใหญ่ในหน้ารายละเอียด (Full URL)
-    let baseUrl = window.location.origin + window.location.pathname;
+    var baseUrl = window.location.origin + window.location.pathname;
     if (!window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
         baseUrl = baseUrl.replace(/^http:\/\//i, 'https://');
     }

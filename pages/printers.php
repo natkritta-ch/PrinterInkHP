@@ -199,7 +199,7 @@ $allDepts = array_keys($groupedPrinters);
 <?php if (!empty($brandSummary)): ?>
 <div style="margin-bottom: 32px">
     <h3 style="font-size: 1.05rem; margin-bottom: 12px; color: var(--text-main); font-weight: 700;">🖨️ สรุปจำนวนเครื่องแยกตามยี่ห้อและรุ่น</h3>
-    <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; align-items: start;">
         <?php $brandIdx = 0; foreach ($brandSummary as $brandName => $bData):
             $brandIdx++;
             $bStats = $bData['stats'];
@@ -210,7 +210,6 @@ $allDepts = array_keys($groupedPrinters);
             $modelCount = count($bData['models']);
         ?>
         <div style="
-            flex: 1; min-width: 260px; max-width: 320px;
             background: #f8fafc;
             border: 1px solid #cbd5e1;
             border-radius: 12px;
@@ -280,7 +279,7 @@ $allDepts = array_keys($groupedPrinters);
 <?php if (!empty($superGrouped) || !empty($standalone)): ?>
 <div style="margin-bottom: 24px;">
     <h3 style="font-size: 1.05rem; margin-bottom: 12px; color: var(--text-main); font-weight: 700;">📊 สรุปความพร้อมใช้งานแต่ละกลุ่มงาน</h3>
-    <div class="dept-summary-grid" style="display: flex; gap: 14px; flex-wrap: wrap;">
+    <div class="dept-summary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
         <?php $sgIdx = 0; foreach ($superGrouped as $parentName => $sg):
             $normal = $sg['stats']['normal'];
             $total = $sg['stats']['total'];
@@ -288,7 +287,7 @@ $allDepts = array_keys($groupedPrinters);
             $subCount = count($sg['subs']);
             $sgIdx++;
         ?>
-            <div style="background: white; border: 1px solid var(--border); border-radius: 16px; min-width: 150px; flex: 1 1 calc(25% - 14px); box-shadow: 0 4px 12px rgba(0,0,0,0.02); border-top: 4px solid <?= $normal == $total ? 'var(--success)' : 'var(--warning)' ?>; max-width: 320px; overflow:hidden;">
+            <div style="background: white; border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); border-top: 4px solid <?= $normal == $total ? 'var(--success)' : 'var(--warning)' ?>; overflow:hidden;">
                 <!-- Clickable header -->
                 <div onclick="toggleSubDetail('sg-<?= $sgIdx ?>')" style="padding: 14px 18px; cursor: pointer; transition: background 0.2s;"
                     onmouseenter="this.style.background='rgba(99,102,241,0.03)'" onmouseleave="this.style.background=''">
@@ -339,7 +338,7 @@ $allDepts = array_keys($groupedPrinters);
             $total = $group['stats']['total'];
             $issues = $group['stats']['repairing'] + $group['stats']['broken'];
         ?>
-            <div style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 14px 18px; min-width: 150px; flex: 1 1 calc(20% - 14px); box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid <?= $normal == $total ? 'var(--success)' : 'var(--warning)' ?>; max-width: 280px;">
+            <div style="background: white; border: 1px solid var(--border); border-radius: 16px; padding: 14px 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid <?= $normal == $total ? 'var(--success)' : 'var(--warning)' ?>;">
                 <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($deptName) ?>">
                     <?= htmlspecialchars($deptName) ?>
                 </div>
